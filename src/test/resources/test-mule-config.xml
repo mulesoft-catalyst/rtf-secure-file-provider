@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:rtf-secure-file-provider="http://www.mulesoft.org/schema/mule/rtf-secure-file-provider"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/rtf-secure-file-provider http://www.mulesoft.org/schema/mule/rtf-secure-file-provider/current/mule-rtf-secure-file-provider.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+
+	<rtf-secure-file-provider:config name="RTF_Secure_File_Provider_Config" doc:name="RTF Secure File Provider Config" doc:id="b322eb56-72e3-4ad9-8829-85f0ed82afaf" secureFileKeys="truststore.jks" fileShareLocation=""/>
+	<flow name="test-mule-configFlow" doc:id="bce2ba12-46e7-4753-b3e3-cafbc77759db" >
+		<logger level="INFO" doc:name="Logger" doc:id="fe0964a8-f2bf-4c37-818d-0a0a5d1af55c" message="test"/>
+	</flow>
+
+</mule>
