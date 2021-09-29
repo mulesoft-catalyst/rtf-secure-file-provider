@@ -9,51 +9,65 @@ import java.util.List;
 
 import com.mule.custom.provider.factory.CustomFileProvider;
 
-public class SecureSecretFIleProvider implements CustomFileProvider{
+public class SecureSecretFIleProvider implements CustomFileProvider {
 
 	@Override
 	public void copyFileToTarget(List<String> files, String target) {
 		// TODO Auto-generated method stub
-		
-	    for(String fileKey: files) {
-	    	
-	    	if(fileKey != null) {
-	    		String fileData = System.getProperty(fileKey.trim());
-	    		if(fileData != null) {
-	    			addFile(target + "/" +fileKey, fileData);
-	    		}
-	    	}
-	    	
-	    }
-		
-	}
-	
-	  private void addFile(String path, String fileData) {
-			File targetFile = new File(path);
-			FileOutputStream fos = null;
-			try {
-				fos = new FileOutputStream(targetFile);
-				if(!targetFile.exists()) {
-					targetFile.createNewFile();
-				}
-				
-				fileData.replaceAll(" ", "");
-				
-				fos.write(Base64.getDecoder().decode(fileData));
-				fos.flush();
-			}catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}catch (IOException e) {
-				e.printStackTrace();
-			}finally {
-				try {
-					if(fos != null) {
-						fos.close();
-					}
-				} catch(IOException e) {
-					e.printStackTrace();
+
+		for (String fileKey : files) {
+
+			if (fileKey != null) {
+				String fileData = System.getProperty(fileKey.trim());
+				if (fileData != null) {
+					addFile(target + "/" + fileKey, fileData);
 				}
 			}
+
+		}
+
+	}
+
+	private void addFile(String path, String fileData) {
+		File targetFile = new File(path);
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(targetFile);
+			if (!targetFile.exists()) {
+				targetFile.createNewFile();
+			}
+
+			fileData.replaceAll(" ", "");
+			fileData = addBase64Padding(fileData);
+
+			fos.write(Base64.getDecoder().decode(fileData));
+			fos.flush();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (fos != null) {
+					fos.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private String addBase64Padding(String base64EncodedString) {
+
+		String paddedString = base64EncodedString;
+		while (paddedString.length() % 4 != 0) {
+
+			paddedString = paddedString + "=";
+
+		}
+
+		return paddedString;
+
 	}
 
 }

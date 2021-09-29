@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mule.rtf.custom.provider</groupId>
     <artifactId>mule-rtf-secure-file-provider-module</artifactId>
-    <version>1.0.12-SNAPSHOT</version>
+    <version>1.0.13-SNAPSHOT</version>
     <packaging>mule-extension</packaging>
-    <name>CustompropertiesproviderExtension</name>
+    <name>rtf-secure-file-provider</name>
 
     <parent>
         <groupId>org.mule.extensions</groupId>
