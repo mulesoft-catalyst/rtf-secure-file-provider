@@ -1,28 +1,10 @@
 # RTF-Secure-File-Provider
 
 ## Introduction
-This mule plugin allows users to read multiple certificates stored via Runtime Fabric secure properties during application startup.
-It reads the certificates which are stored in Base64 format using secure properties and write them in mule application base path.
+This repository involves custom developed components that is not part of MuleSoft product suite and therefore not supported by MuleSoft support. Technical assistance for these components are limited to this documentation.This is an UNLICENSED utility, please review the considerations. If you need assistance on extending this application, contact your MuleSoft Customer Success representative or MuleSoft Professional Services
 
 ![RTFScureFileProvider](https://user-images.githubusercontent.com/36458155/132572021-17adc5be-21e0-4146-8f04-bf5b71500bd6.jpeg)
 
-## Prerequisite
-
-Base64 encode the TLS certificate
-The tls certificates can be base64 encoded Using openssl(or a Base64 encoding utility) as below:
-
-```
-openssl base64 -A -in <<FILE_NAME>>
-```
-
-Add the base64 encoded string as a secret (secure properties)
-
-```
-./rtfctl apply secure-property --key <<Key Name>> --value <<BASE64 Encoded String from above step>> -n <<Environment ID>>
-```
-
-Note - In the above step you may want to keep the key same as the file name you would use in your Mule application.
-example - truststore.jks
 
 ## Installation
 Users can install the mule plugin into local maven repository, Exchange or your enterprise artifact repository like artificatory
@@ -64,5 +46,36 @@ If you are adding dependency from exchange the groupId should match your Organiz
 Note - Maven steps are detailed [here](https://docs.mulesoft.com/mule-runtime/4.3/maven-reference)
 
 ## Using the module
-Detailed documentation is present [here](https://docs.google.com/document/d/1k1HSuS14HGzSeCe4we9i8xlAFJTapgOlLvzQBenvxO4/edit?usp=sharing)
+
+### Base 64 encode TLS certificates
+
+Base64 encode the TLS certificate
+The tls certificates can be base64 encoded Using openssl(or a Base64 encoding utility) as below:
+
+```
+openssl base64 -A -in <<FILE_NAME>>
+```
+
+### Add the base64 encoded string as a secret (secure properties)
+
+```
+./rtfctl apply secure-property --key <<Key Name>> --value <<BASE64 Encoded String from above step>> -n <<Environment ID>>
+```
+
+Note - In the above step you may want to keep the key same as the file name you would use in your Mule application.
+example - truststore.jks
+
+### Configure Mule application to use the TLS certificate
+In this step add the certificate file name to Mule configuration file the same you would have configured before.
+
+![](https://user-images.githubusercontent.com/36458155/139069738-f61154fc-89b5-481f-9797-e77a53becf74.png)
+
+### Configure RTF secure file provider custom component
+This is a custom component that needs to be configured in the Mule application. This component loads the base64 encoded file that was added to secure properties before to application classpath during startup.
+
+![](https://user-images.githubusercontent.com/36458155/139069760-eae019b9-e7e8-4d6d-b4e5-b04b9d2786cf.png)
+
+
+### Running application on Studio
+In order to run the application in the studio without adding tls certificates to /src folder all you need to do is add the secret key (file name) and base64 encoded value to program arguments under run configurations.
 
