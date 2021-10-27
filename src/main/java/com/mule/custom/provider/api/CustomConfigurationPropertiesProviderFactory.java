@@ -10,6 +10,10 @@ import static com.mule.custom.provider.api.CustomConfigurationPropertiesExtensio
 import static com.mule.custom.provider.api.CustomConfigurationPropertiesExtensionLoadingDelegate.EXTENSION_NAME;
 import static org.mule.runtime.api.component.ComponentIdentifier.builder;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.Optional;
+
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.config.api.dsl.model.ConfigurationParameters;
 import org.mule.runtime.config.api.dsl.model.ResourceProvider;
@@ -17,20 +21,8 @@ import org.mule.runtime.config.api.dsl.model.properties.ConfigurationPropertiesP
 import org.mule.runtime.config.api.dsl.model.properties.ConfigurationPropertiesProviderFactory;
 import org.mule.runtime.config.api.dsl.model.properties.ConfigurationProperty;
 
-import com.emc.ecs.nfsclient.nfs.io.Nfs3File;
-import com.emc.ecs.nfsclient.nfs.io.NfsFileInputStream;
-import com.emc.ecs.nfsclient.nfs.nfs3.Nfs3;
 import com.mule.custom.provider.factory.CustomFileProvider;
 import com.mule.custom.provider.factory.CustomFileProviderFactory;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Optional;
 
 /**
  * Builds the provider for a custom-properties-provider:config element.
@@ -65,7 +57,10 @@ public class CustomConfigurationPropertiesProviderFactory implements Configurati
 		String target = baseFolder + "/" + appFolderName;
 		
 		CustomFileProvider provider = CustomFileProviderFactory.getFileProvider(fileShare);
-		provider.copyFileToTarget(Arrays.asList(customParameterValues), target);
+		if(provider != null) {
+			provider.copyFileToTarget(Arrays.asList(customParameterValues), target);
+		}
+		
 		
 
 

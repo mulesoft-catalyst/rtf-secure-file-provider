@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mule.rtf.custom.provider</groupId>
     <artifactId>mule-rtf-secure-file-provider-module</artifactId>
-    <version>1.0.13-SNAPSHOT</version>
+    <version>1.0.14-SNAPSHOT</version>
     <packaging>mule-extension</packaging>
     <name>rtf-secure-file-provider</name>
 
@@ -26,11 +26,7 @@
     <artifactId>client-java</artifactId>
     <version>13.0.0</version>
 </dependency>
-<dependency>
-    <groupId>com.emc.ecs</groupId>
-    <artifactId>nfs-client</artifactId>
-    <version>1.0.3</version>
-</dependency>
+
     </dependencies>
 
     <repositories>

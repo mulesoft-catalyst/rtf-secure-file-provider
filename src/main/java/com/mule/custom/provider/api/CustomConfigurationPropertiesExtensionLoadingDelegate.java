@@ -9,9 +9,8 @@ package com.mule.custom.provider.api;
 import static org.mule.metadata.api.model.MetadataFormat.JAVA;
 import static org.mule.runtime.api.meta.Category.SELECT;
 import static org.mule.runtime.api.meta.ExpressionSupport.NOT_SUPPORTED;
+
 import org.mule.metadata.api.builder.BaseTypeBuilder;
-import org.mule.metadata.api.model.MetadataType;
-import org.mule.metadata.api.model.impl.DefaultArrayType;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ParameterGroupDeclarer;
@@ -44,7 +43,8 @@ public class CustomConfigurationPropertiesExtensionLoadingDelegate implements Ex
     // TODO you can add/remove configuration parameter using the code below.
     defaultParameterGroup.withOptionalParameter("fileShareLocation").ofType(BaseTypeBuilder.create(JAVA).stringType().build())
     .withExpressionSupport(NOT_SUPPORTED)
-    .describedAs("File Share Location");
+    .describedAs("File Share Location")
+    .defaultingTo("secure-secret://");
 
     defaultParameterGroup
         .withRequiredParameter("secureFileKeys").ofType(BaseTypeBuilder.create(JAVA).stringType().build())
